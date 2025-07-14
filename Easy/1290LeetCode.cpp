@@ -1,4 +1,4 @@
-// Problem: https://leetcode.com/problems/two-sum/
+// Problem: https:https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer
 // Category: Easy
 // Language: C++
 // Time Complexity: O(n), Space Complexity: O(1)
