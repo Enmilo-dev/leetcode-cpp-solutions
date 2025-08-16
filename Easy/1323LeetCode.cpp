@@ -1,0 +1,21 @@
+// Problem: https://leetcode.com/problems/maximum-69-number
+// Category: Easy
+// Language: C++
+// Time Complexity: O(n), Space Complexity: O(1)
+
+
+class Solution {
+public:
+    int maximum69Number (int num) {
+        string nums = to_string(num);
+
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i]=='6'){
+                nums[i]='9';
+                return stoi(nums);
+            }
+        }
+
+        return num;
+    }
+};
