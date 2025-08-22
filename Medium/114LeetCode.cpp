@@ -1,7 +1,7 @@
 // Problem: https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
 // Category: Medium
 // Language: C++
-// Time Complexity: O(n), Space Complexity: O(n)
+// Time Complexity: O(n), Space Complexity: O(1)
 
 
 /**
@@ -17,30 +17,23 @@
  */
 class Solution {
 public:
-    void preOrder(TreeNode* root, vector<int> &nums) {
-        if(root==nullptr) return;
-        nums.push_back(root->val);
-
-        preOrder(root->left, nums);
-        preOrder(root->right, nums);
-    }
-
     void flatten(TreeNode* root) {
-        vector<int> nums;
-        preOrder(root, nums);
+        if (root == nullptr) return;
 
         TreeNode* curr = root;
+        while(curr) {
+            if(curr->left) {
+                TreeNode* temp = curr->left;
 
-        for (int i=0; i<nums.size(); i++) {
-            curr->val=nums[i];
-            curr->left=nullptr;
-
-            if (i<nums.size()-1) {
-                if (curr->right == nullptr) {
-                    curr->right = new TreeNode();
+                while(temp->right) {
+                    temp=temp->right;
                 }
-                curr = curr->right;
+
+                temp->right=curr->right;
+                curr->right=curr->left;
+                curr->left=nullptr;
             }
+            curr=curr->right;
         }
     }
 };
