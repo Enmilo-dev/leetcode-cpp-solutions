@@ -1,7 +1,7 @@
 // Problem: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 // Category: Medium
 // Language: C++
-// Time Complexity: O(n), Space Complexity: O(n)
+// Time Complexity: O(n), Space Complexity: O(1)
 
 
 /**
@@ -17,21 +17,26 @@
  */
 class Solution {
 public:
+    int count = 0;
     int kthSmallest(TreeNode* root, int k) {
-        vector<int> nums;
-        arr(root, nums);
-
-        sort(nums.begin(), nums.end());
-        return nums[k-1];
-    }
-    void arr(TreeNode* root, vector<int> &nums) {
-        if (root == nullptr) {
-            return;
+        if (root->left) {
+            int leftAns = kthSmallest(root->left, k);
+            if (leftAns!=-1) {
+                return leftAns;
+            }
         }
 
-        nums.push_back(root->val);
-        arr(root->left, nums);
-        arr(root->right, nums);
+        if (count+1 == k) {
+            return root->val;
+        }
+        count++;
 
+        if(root->right) {
+            int rightAns = kthSmallest(root->right, k);
+            if (rightAns!=-1) {
+                return rightAns;
+            }
+        }
+        return -1;
     }
 };
